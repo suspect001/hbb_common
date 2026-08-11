@@ -5,6 +5,7 @@ fn main() {
 
     protobuf_codegen::Codegen::new()
         .pure()
+        .emit_rerun_if_changed(true)
         .out_dir(out_dir)
         .inputs(["protos/rendezvous.proto", "protos/message.proto"])
         .include("protos")
