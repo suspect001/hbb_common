@@ -859,7 +859,47 @@ message Misc {
     DisplayResolution change_display_resolution = 36;
     MessageQuery message_query = 37;
     int32 follow_current_display = 38;
+    FileRangeRequest file_range_request = 40;
+    MediaListRequest media_list_request = 41;
+    ThumbRequest thumb_request = 42;
   }
+}
+
+// Gallery: request a byte range of a media file (video streaming).
+message FileRangeRequest {
+  string path = 1;
+  uint64 offset = 2;
+  uint32 length = 3;
+}
+
+// Gallery: media file list for one directory.
+message MediaListRequest {
+  string dir = 1;
+}
+
+// Gallery: thumbnail for one media file.
+message ThumbRequest {
+  string path = 1;
+}
+
+// Gallery: byte range response.
+message FileRangeData {
+  string path = 1;
+  uint64 offset = 2;
+  bytes data = 3;
+  bool eof = 4;
+}
+
+// Gallery: media list response (json payload).
+message MediaListData {
+  string dir = 1;
+  string json = 2;
+}
+
+// Gallery: thumbnail response (raw jpeg bytes).
+message ThumbData {
+  string path = 1;
+  bytes data = 2;
 }
 
 message VoiceCallRequest {
@@ -981,5 +1021,8 @@ message Message {
     ScreenshotResponse screenshot_response= 30;
     TerminalAction terminal_action = 31;
     TerminalResponse terminal_response = 32;
+    FileRangeData file_range_data = 40;
+    MediaListData media_list_data = 41;
+    ThumbData thumb_data = 42;
   }
 }
