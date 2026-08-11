@@ -1,6 +1,8 @@
 fn main() {
-    // cargo standard directive: re-run this build script when the proto
-    // files change, so generated code is not stale (cached OUT_DIR).
+    // cargo standard directives: re-run this build script when the proto
+    // files change (or files are added/removed in the protos dir), so
+    // generated code is not stale (cached OUT_DIR).
+    println!("cargo:rerun-if-changed=protos");
     println!("cargo:rerun-if-changed=protos/rendezvous.proto");
     println!("cargo:rerun-if-changed=protos/message.proto");
 
